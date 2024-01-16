@@ -27,4 +27,4 @@ public static class ServiceRegistration
         BrandBusinessRules,
         Mapper
     );
-} // IoC Container yapımızı kurduğumuz Dependency Injection ile daha verimli hale getiricez.
+} 
