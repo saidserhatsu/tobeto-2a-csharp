@@ -2,29 +2,25 @@
 using Business.Abstract;
 using Business.BusinessRules;
 using Business.Concrete;
-using Business.Requests.Transmission;
+using Business.Request.Transmission;
+using Business.Responses.Transmission;
 using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 
 namespace WebAPI
 {
-    public class TransmissionServiceRegistration
+    public static class TransmissionServiceRegistration
     {
+
         public static readonly ITransmissionDal TransmissionDal = new InMemoryTransmissionDal();
-
-        public static readonly TransmissionBusinnesRules TransmissionBusinnesRules = new TransmissionBusinnesRules(TransmissionDal);
-
-        public static IMapper Mapper = new MapperConfiguration(cfg =>
+        public static readonly TransmissionBusinessRules transmissionBusinessRules = new TransmissionBusinessRules(TransmissionDal);
+        public static IMapper Mapper => new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<AddTransmissionRequest, Fuel>();
-            cfg.CreateMap<Fuel, AddTransmissionRequest>();
+            cfg.CreateMap<AddTransmissionRequest, Transmission>();
+            cfg.CreateMap<Transmission, AddTransmissionResponse>();
         }).CreateMapper();
-
-        public static readonly ITransmissionService transmissionService = new TransmissionManager(
-            TransmissionDal,
-            TransmissionBusinnesRules,
-            Mapper
-        );
+        public static readonly ITransmissionService TransmissionService = new TransmissionManager(TransmissionDal, transmissionBusinessRules, Mapper);
     }
+
 }

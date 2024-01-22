@@ -1,10 +1,8 @@
-﻿using DataAccess.Abstract;
-using Entities.Concrete;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DataAccess.Abstract;
+using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -16,6 +14,11 @@ namespace DataAccess.Concrete.EntityFramework
         }
 
         public void Delete(Fuel entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Fuel> GetModelsByNameSearch(string nameSearch)
         {
             throw new NotImplementedException();
         }

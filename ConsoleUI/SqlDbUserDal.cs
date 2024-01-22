@@ -1,26 +1,27 @@
-﻿namespace ConsoleUI;
-
-internal class SqlDbUserDal : IUserDal
+﻿namespace ConsoleUI
 {
-    //public int MyProperty { get; set; }
-
-    public void Add(User user)
+    internal class SqlDbUserDal : IUserDal
     {
-        Console.WriteLine("Sql veri tabanına veri yazıldı.");
-    }
+        //public int MyProperty { get ; set ; }
 
-    public void Delete(User user)
-    {
-        throw new NotImplementedException();
-    }
+        public void Add(User user)
+        {
+            Console.WriteLine("Sql veri tabanına veri yazıldı");
+        }
 
-    public void GetById(int id)
-    {
-        throw new NotImplementedException();
-    }
+        public void Delete(User user)
+        {
+            throw new NotImplementedException();
+        }
 
-    public void Update(User user)
-    {
-        throw new NotImplementedException();
+        public void GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

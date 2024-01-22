@@ -1,1 +1,1 @@
-﻿RentACar dışında da, diğer yazılım projelerine kullanmak üzere ortak kodları bu katmanda saklayabiliriz.
+﻿RentACar dışında da, diğer yazılım projelerinde kullanmak üzere diğer ortak kodları bu katmanda saklayabiliriz.

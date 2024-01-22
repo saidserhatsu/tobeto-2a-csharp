@@ -1,54 +1,55 @@
 ﻿using AutoMapper;
 using Business.Abstract;
 using Business.BusinessRules;
-using Business.Requests.Brand;
+using Business.Request.Brand;
 using Business.Responses.Brand;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
-namespace Business.Concrete;
-
-public class BrandManager : IBrandService
+namespace Business.Concrete
 {
-    private readonly IBrandDal _brandDal;
-    private readonly BrandBusinessRules _brandBusinessRules;
-    private readonly IMapper _mapper;
-
-    public BrandManager(IBrandDal brandDal, BrandBusinessRules brandBusinessRules, IMapper mapper)
+    public class BrandManager : IBrandService
     {
-        _brandDal = brandDal; //new InMemoryBrandDal(); // Başka katmanların class'ları new'lenmez. Bu yüzden dependency injection kullanıyoruz.
-        _brandBusinessRules = brandBusinessRules;
-        _mapper = mapper;
-    }
+        private readonly IBrandDal _brandDal;
+        private readonly BrandBusinessRules _brandBusinessRules;
+        private IMapper _mapper;
 
-    public AddBrandResponse Add(AddBrandRequest request)
-    {
-        // İş Kuralları
-        _brandBusinessRules.CheckIfBrandNameNotExists(request.Name);
+        public BrandManager(IBrandDal brandDal, BrandBusinessRules brandBusinessRules, IMapper mapper)
+        {
+            _brandDal = brandDal;//new InMemoryDal(); // başka katmanların classları newlenmez. bu yüzden dependency injection 
+            _brandBusinessRules = brandBusinessRules;
+            _mapper = mapper;
+        }
 
-        // Validation
-        // Yetki kontrolü
-        // Cache
-        // Transaction
+        public AddBrandResponse Add(AddBrandRequest request)
+        { //İş kuralları
+            _brandBusinessRules.CheckIfBrandNameExists(request.Name);
 
-        //Brand brandToAdd = new(request.Name)
-        Brand brandToAdd = _mapper.Map<Brand>(request); // Mapping
+            //validation
+            //yetki kontrolü 
+            //Cache
+            //Transaction vs..
+            // Brand addedBrand=
 
-        _brandDal.Add(brandToAdd);
+            Brand brandToAdd = _mapper.Map<Brand>(request);   //mapping    //new(request.name) elle newlemek yerine mappleme özelliğini kullanıyoruz.         //aynı işlemde eşleşen kısımları, Brand nesnesinde oluşturuyor  
+            _brandDal.Add(brandToAdd);
+            //Mapping
+            AddBrandResponse response = _mapper.Map<AddBrandResponse>(brandToAdd);
+            return response;
+        }
 
-        AddBrandResponse response = _mapper.Map<AddBrandResponse>(brandToAdd);
-        return response;
-    }
-
-    public IList<Brand> GetList()
-    {
-        // İş Kuralları
-        // Validation
-        // Yetki kontrolü
-        // Cache
-        // Transaction
-
-        IList<Brand> brandList = _brandDal.GetList();
-        return brandList;
+        public GetBrandListResponse GetList(GetBrandListRequest request)
+        {
+            //İş kodları
+            //validation
+            //yetki kontrolü 
+            //Cache
+            //Transaction vs..
+            IList<Brand> brandList = _brandDal.GetList();
+            //Brand -> BrandListItemDto
+            // IList<Brand> -> GetBrandListResponse
+            GetBrandListResponse response = _mapper.Map<GetBrandListResponse>(brandList);
+            return response;
+        }
     }
 }

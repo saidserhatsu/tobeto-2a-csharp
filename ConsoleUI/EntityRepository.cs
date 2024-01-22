@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 
-namespace ConsoleUI;
-
-internal class EntityRepository
+namespace ConsoleUI
 {
-    internal void UpdateEntity(Entity entity)
+    internal class EntityRepository
     {
-        entity.LastUpdatedAt = DateTime.UtcNow;
-        Console.WriteLine(JsonConvert.SerializeObject(entity));
+        internal void UpdateEntity(Entity entity)
+        {
+            entity.UpdatedAt = DateTime.UtcNow;
+            Console.WriteLine(JsonConvert.SerializeObject(entity));
+        }
     }
 }

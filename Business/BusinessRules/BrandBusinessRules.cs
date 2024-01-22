@@ -1,22 +1,23 @@
-﻿using DataAccess.Abstract;
+﻿
+using DataAccess.Abstract;
 
-namespace Business.BusinessRules;
-
-public class BrandBusinessRules
+namespace Business.BusinessRules
 {
-    private readonly IBrandDal _brandDal;
-
-    public BrandBusinessRules(IBrandDal brandDal)
+    public class BrandBusinessRules
     {
-        _brandDal = brandDal;
-    }
-
-    public void CheckIfBrandNameNotExists(string brandName)
-    {
-        bool isExists = _brandDal.GetList().Any(b => b.Name == brandName);
-        if (isExists)
+        private readonly IBrandDal _brandDal;
+        public BrandBusinessRules(IBrandDal brandDal)
         {
-            throw new Exception("Brand already exists.");
+            _brandDal = brandDal;
+        }
+        public void CheckIfBrandNameExists(string brandName)
+        {
+            bool isExists = _brandDal.GetList().Any(b => b.Name == brandName);
+
+            if (isExists)
+            {
+                throw new Exception("Brand already exists.");
+            }
         }
     }
 }

@@ -1,22 +1,17 @@
 ﻿using Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Fuel: Entity<int>
+    public class Fuel : Entity<int>
     {
-        public string FuelName { get; set; }
+        public string Name { get; set; }
         public Fuel()
         {
-        }
 
-        public Fuel(string fuelName)
+        }
+        public Fuel(string name)
         {
-            FuelName = fuelName;
+            Name = name;
         }
     }
 }
